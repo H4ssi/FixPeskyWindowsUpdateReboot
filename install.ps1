@@ -1,0 +1,3 @@
+$Time = New-ScheduledTaskTrigger -At "00:00" -Once -RepetitionInterval "00:05:00"
+$Action = New-ScheduledTaskAction -Execute PowerShell -Argument '-NoLogo -NonInteractive -Command "Set-ScheduledTask Reboot \Microsoft\Windows\UpdateOrchestrator\ -Trigger $(New-ScheduledTaskTrigger -At 2022-2-22-22:22 -Once)"'
+Register-ScheduledTask -TaskName "FixPeskyWindowsUpdateReboot" -Trigger $Time -Action $Action
