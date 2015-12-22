@@ -1,0 +1,1 @@
+PowerShell -Command - < install.ps1
