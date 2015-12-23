@@ -1,1 +1,1 @@
-Unregister-ScheduledTask -TaskName "FixPeskyWindowsUpdateReboot"
+Unregister-ScheduledTask -TaskName "FixPeskyWindowsUpdateReboot" -Confirm:$false
