@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace pwu
 {
@@ -11,8 +12,10 @@ namespace pwu
     {
         static void Main(string[] args)
         {
-            SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
-            Thread.Sleep(Timeout.InfiniteTimeSpan);
+            HiddenForm f = new HiddenForm();
+            f.onStart += () => { SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged; };
+            f.onExit += () => { SystemEvents.PowerModeChanged -= SystemEvents_PowerModeChanged; };
+            Application.Run(f);
         }
 
         private static void SystemEvents_PowerModeChanged(object sender, PowerModeChangedEventArgs e)
