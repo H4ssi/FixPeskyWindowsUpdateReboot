@@ -13,8 +13,15 @@ namespace pwu
         static void Main(string[] args)
         {
             HiddenForm f = new HiddenForm();
-            f.onStart += () => { SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged; };
-            f.onExit += () => { SystemEvents.PowerModeChanged -= SystemEvents_PowerModeChanged; };
+            f.onStart += () =>
+            {
+                SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
+            };
+            f.onExit += () =>
+            {
+                SystemEvents.PowerModeChanged -= SystemEvents_PowerModeChanged;
+                disableRebootWakeTimer();
+            };
             Application.Run(f);
         }
 
@@ -25,6 +32,11 @@ namespace pwu
                 return;
             }
 
+            disableRebootWakeTimer();
+        }
+
+        private static void disableRebootWakeTimer()
+        {
             TaskScheduler.TaskScheduler t = new TaskScheduler.TaskScheduler();
             t.Connect();
 
