@@ -6,3 +6,5 @@ try {
         write-host "You may try running the script with Administrator privileges"
     }
 }
+
+Remove-Item "$env:ProgramFiles\pwu" -Recurse -Force -ErrorAction Ignore
